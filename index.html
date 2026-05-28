@@ -31,7 +31,7 @@ export default function DgncngndzPlatform() {
             <h2 className="text-3xl font-light mb-6">Services</h2>
             <div className="grid md:grid-cols-3 gap-4">
               {["Talent Management", "Brand Development", "Deal Structuring"].map((s) => (
-                <div key={s} className="p-5 border rounded-xl hover:shadow-sm transition">
+                <div key={s} className="p-5 bg-white rounded-xl shadow-sm">
                   {s}
                 </div>
               ))}
@@ -45,7 +45,7 @@ export default function DgncngndzPlatform() {
             <h2 className="text-3xl font-light mb-6">Talent</h2>
             <div className="grid md:grid-cols-4 gap-3">
               {["Football", "DJ", "Musician", "Tennis", "Basketball", "Comedian", "Actor", "Model"].map((t) => (
-                <div key={t} className="p-4 border rounded-xl text-sm">
+                <div key={t} className="p-4 bg-white rounded-xl shadow-sm text-sm">
                   {t}
                 </div>
               ))}
@@ -59,7 +59,7 @@ export default function DgncngndzPlatform() {
             <h2 className="text-3xl font-light mb-6">Clients</h2>
             <div className="grid md:grid-cols-3 gap-4">
               {["Athletes", "Artists", "Brands"].map((c) => (
-                <div key={c} className="p-5 border rounded-xl">
+                <div key={c} className="p-5 bg-white rounded-xl shadow-sm">
                   {c}
                 </div>
               ))}
@@ -70,10 +70,10 @@ export default function DgncngndzPlatform() {
       case "cases":
         return (
           <div>
-            <h2 className="text-3xl font-light mb-6">Case Studies</h2>
+            <h2 className="text-3xl font-light mb-6">Cases</h2>
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
-                <div key={i} className="p-5 border rounded-xl">
+                <div key={i} className="p-5 bg-white rounded-xl shadow-sm">
                   Case Study Project {i}
                 </div>
               ))}
@@ -106,40 +106,28 @@ export default function DgncngndzPlatform() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black">
-      {/* TOP NAVBAR */}
-      <header className="fixed top-0 left-0 w-full h-14 border-b bg-white z-20 flex items-center justify-center">
-        <div className="flex gap-6 text-sm">
-          {menu.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setPage(m.id)}
-              className={`transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
-            >
-              {m.label}
-            </button>
-          ))}
+    <div className="min-h-screen bg-gray-100 text-black">
+      {/* NAVBAR ONLY */}
+      <header className="w-full bg-white border-b shadow-sm fixed top-0 left-0 z-50">
+        <div className="max-w-6xl mx-auto px-6 h-14 flex items-center justify-between">
+          <div className="font-medium tracking-widest">dgncngndz</div>
+
+          <nav className="flex gap-6 text-sm">
+            {menu.map((m) => (
+              <button
+                key={m.id}
+                onClick={() => setPage(m.id)}
+                className={`transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
+              >
+                {m.label}
+              </button>
+            ))}
+          </nav>
         </div>
       </header>
 
-      {/* SIDEBAR */}
-      <aside className="fixed left-0 top-14 w-56 h-[calc(100vh-56px)] border-r bg-white p-6">
-        <div className="text-lg tracking-widest mb-8">dgncngndz</div>
-        <div className="flex flex-col gap-3">
-          {menu.map((m) => (
-            <button
-              key={m.id}
-              onClick={() => setPage(m.id)}
-              className={`text-left text-sm transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
-            >
-              {m.label}
-            </button>
-          ))}
-        </div>
-      </aside>
-
-      {/* MAIN CONTENT */}
-      <main className="pt-20 ml-56 p-10 md:p-16">
+      {/* CONTENT */}
+      <main className="pt-24 max-w-6xl mx-auto px-6">
         {renderContent()}
       </main>
     </div>
