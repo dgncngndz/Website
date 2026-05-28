@@ -13,14 +13,14 @@ export default function DgncngndzPlatform() {
     { id: "contact", label: "Contact" },
   ];
 
-  const renderPage = () => {
+  const renderContent = () => {
     switch (page) {
       case "home":
         return (
           <div>
-            <h1 className="text-5xl font-light">dgncngndz</h1>
+            <h1 className="text-5xl font-light tracking-tight">dgncngndz</h1>
             <p className="mt-4 text-gray-600 max-w-xl">
-              Global talent & management platform across sports and entertainment.
+              Global talent & management platform across sports and entertainment industries.
             </p>
           </div>
         );
@@ -29,10 +29,12 @@ export default function DgncngndzPlatform() {
         return (
           <div>
             <h2 className="text-3xl font-light mb-6">Services</h2>
-            <div className="grid gap-4">
-              <div className="p-4 border rounded-xl">Talent Management</div>
-              <div className="p-4 border rounded-xl">Brand Development</div>
-              <div className="p-4 border rounded-xl">Deal Structuring</div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {["Talent Management", "Brand Development", "Deal Structuring"].map((s) => (
+                <div key={s} className="p-5 border rounded-xl hover:shadow-sm transition">
+                  {s}
+                </div>
+              ))}
             </div>
           </div>
         );
@@ -41,9 +43,9 @@ export default function DgncngndzPlatform() {
         return (
           <div>
             <h2 className="text-3xl font-light mb-6">Talent</h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid md:grid-cols-4 gap-3">
               {["Football", "DJ", "Musician", "Tennis", "Basketball", "Comedian", "Actor", "Model"].map((t) => (
-                <div key={t} className="p-4 border rounded-xl">
+                <div key={t} className="p-4 border rounded-xl text-sm">
                   {t}
                 </div>
               ))}
@@ -55,10 +57,12 @@ export default function DgncngndzPlatform() {
         return (
           <div>
             <h2 className="text-3xl font-light mb-6">Clients</h2>
-            <div className="grid gap-4">
-              <div className="p-4 border rounded-xl">Athletes</div>
-              <div className="p-4 border rounded-xl">Artists</div>
-              <div className="p-4 border rounded-xl">Brands</div>
+            <div className="grid md:grid-cols-3 gap-4">
+              {["Athletes", "Artists", "Brands"].map((c) => (
+                <div key={c} className="p-5 border rounded-xl">
+                  {c}
+                </div>
+              ))}
             </div>
           </div>
         );
@@ -68,9 +72,11 @@ export default function DgncngndzPlatform() {
           <div>
             <h2 className="text-3xl font-light mb-6">Case Studies</h2>
             <div className="space-y-4">
-              <div className="p-4 border rounded-xl">Career Management Case #1</div>
-              <div className="p-4 border rounded-xl">Brand Deal Case #2</div>
-              <div className="p-4 border rounded-xl">International Transfer Case #3</div>
+              {[1, 2, 3].map((i) => (
+                <div key={i} className="p-5 border rounded-xl">
+                  Case Study Project {i}
+                </div>
+              ))}
             </div>
           </div>
         );
@@ -80,8 +86,8 @@ export default function DgncngndzPlatform() {
           <div>
             <h2 className="text-3xl font-light mb-6">About</h2>
             <p className="text-gray-600 max-w-2xl">
-              We operate a global talent management system focused on sports, entertainment,
-              and creative industries with long-term career strategy and brand positioning.
+              A global management platform focused on long-term career development
+              across sports, entertainment, and creative industries.
             </p>
           </div>
         );
@@ -100,27 +106,42 @@ export default function DgncngndzPlatform() {
   };
 
   return (
-    <div className="min-h-screen bg-white text-black flex">
-      {/* SIDEBAR */}
-      <div className="w-64 border-r h-screen fixed left-0 top-0 p-6">
-        <div className="text-xl tracking-widest mb-10">dgncngndz</div>
-        <div className="flex flex-col gap-4">
+    <div className="min-h-screen bg-white text-black">
+      {/* TOP NAVBAR */}
+      <header className="fixed top-0 left-0 w-full h-14 border-b bg-white z-20 flex items-center justify-center">
+        <div className="flex gap-6 text-sm">
           {menu.map((m) => (
             <button
               key={m.id}
               onClick={() => setPage(m.id)}
-              className={`text-left transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
+              className={`transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
             >
               {m.label}
             </button>
           ))}
         </div>
-      </div>
+      </header>
 
-      {/* CONTENT */}
-      <div className="ml-64 flex-1 p-16">
-        {renderPage()}
-      </div>
+      {/* SIDEBAR */}
+      <aside className="fixed left-0 top-14 w-56 h-[calc(100vh-56px)] border-r bg-white p-6">
+        <div className="text-lg tracking-widest mb-8">dgncngndz</div>
+        <div className="flex flex-col gap-3">
+          {menu.map((m) => (
+            <button
+              key={m.id}
+              onClick={() => setPage(m.id)}
+              className={`text-left text-sm transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+      </aside>
+
+      {/* MAIN CONTENT */}
+      <main className="pt-20 ml-56 p-10 md:p-16">
+        {renderContent()}
+      </main>
     </div>
   );
 }
