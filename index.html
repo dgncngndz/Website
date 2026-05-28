@@ -1,102 +1,126 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Doğancan Gündüz | Football Management</title>
+import { useState } from "react";
 
-  <style>
-    body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #0b0f1a;
-      color: white;
-      text-align: center;
+export default function DgncngndzPlatform() {
+  const [page, setPage] = useState("home");
+
+  const menu = [
+    { id: "home", label: "Home" },
+    { id: "services", label: "Services" },
+    { id: "talent", label: "Talent" },
+    { id: "clients", label: "Clients" },
+    { id: "cases", label: "Cases" },
+    { id: "about", label: "About" },
+    { id: "contact", label: "Contact" },
+  ];
+
+  const renderPage = () => {
+    switch (page) {
+      case "home":
+        return (
+          <div>
+            <h1 className="text-5xl font-light">dgncngndz</h1>
+            <p className="mt-4 text-gray-600 max-w-xl">
+              Global talent & management platform across sports and entertainment.
+            </p>
+          </div>
+        );
+
+      case "services":
+        return (
+          <div>
+            <h2 className="text-3xl font-light mb-6">Services</h2>
+            <div className="grid gap-4">
+              <div className="p-4 border rounded-xl">Talent Management</div>
+              <div className="p-4 border rounded-xl">Brand Development</div>
+              <div className="p-4 border rounded-xl">Deal Structuring</div>
+            </div>
+          </div>
+        );
+
+      case "talent":
+        return (
+          <div>
+            <h2 className="text-3xl font-light mb-6">Talent</h2>
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              {["Football", "DJ", "Musician", "Tennis", "Basketball", "Comedian", "Actor", "Model"].map((t) => (
+                <div key={t} className="p-4 border rounded-xl">
+                  {t}
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+
+      case "clients":
+        return (
+          <div>
+            <h2 className="text-3xl font-light mb-6">Clients</h2>
+            <div className="grid gap-4">
+              <div className="p-4 border rounded-xl">Athletes</div>
+              <div className="p-4 border rounded-xl">Artists</div>
+              <div className="p-4 border rounded-xl">Brands</div>
+            </div>
+          </div>
+        );
+
+      case "cases":
+        return (
+          <div>
+            <h2 className="text-3xl font-light mb-6">Case Studies</h2>
+            <div className="space-y-4">
+              <div className="p-4 border rounded-xl">Career Management Case #1</div>
+              <div className="p-4 border rounded-xl">Brand Deal Case #2</div>
+              <div className="p-4 border rounded-xl">International Transfer Case #3</div>
+            </div>
+          </div>
+        );
+
+      case "about":
+        return (
+          <div>
+            <h2 className="text-3xl font-light mb-6">About</h2>
+            <p className="text-gray-600 max-w-2xl">
+              We operate a global talent management system focused on sports, entertainment,
+              and creative industries with long-term career strategy and brand positioning.
+            </p>
+          </div>
+        );
+
+      case "contact":
+        return (
+          <div>
+            <h2 className="text-3xl font-light mb-6">Contact</h2>
+            <p className="text-gray-600">contact@dgncngndz.net</p>
+          </div>
+        );
+
+      default:
+        return null;
     }
+  };
 
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-      padding: 100px 20px;
-    }
+  return (
+    <div className="min-h-screen bg-white text-black flex">
+      {/* SIDEBAR */}
+      <div className="w-64 border-r h-screen fixed left-0 top-0 p-6">
+        <div className="text-xl tracking-widest mb-10">dgncngndz</div>
+        <div className="flex flex-col gap-4">
+          {menu.map((m) => (
+            <button
+              key={m.id}
+              onClick={() => setPage(m.id)}
+              className={`text-left transition hover:opacity-100 ${page === m.id ? "font-medium" : "opacity-50"}`}
+            >
+              {m.label}
+            </button>
+          ))}
+        </div>
+      </div>
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 18px;
-      opacity: 0.8;
-      margin-bottom: 40px;
-    }
-
-    .btn {
-      display: inline-block;
-      padding: 14px 28px;
-      background: #ffffff;
-      color: #000;
-      text-decoration: none;
-      border-radius: 8px;
-      font-weight: bold;
-      transition: 0.3s;
-    }
-
-    .btn:hover {
-      background: #d9d9d9;
-    }
-
-    .card {
-      margin-top: 60px;
-      padding: 30px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.1);
-      border-radius: 16px;
-      backdrop-filter: blur(10px);
-    }
-
-    .footer {
-      margin-top: 80px;
-      font-size: 12px;
-      opacity: 0.5;
-    }
-  </style>
-</head>
-
-<body>
-
-  <div class="container">
-
-    <h1>Doğancan Gündüz</h1>
-    <p>Football Management & Scouting Agency</p>
-
-    <a class="btn" href="https://cal.com" target="_blank">
-      Book a Meeting
-    </a>
-
-    <div class="card">
-      <h2>About</h2>
-      <p>
-        We manage players, coaches and talent scouting across Europe and the Middle East.
-        Focused on performance, career growth and professional transfers.
-      </p>
+      {/* CONTENT */}
+      <div className="ml-64 flex-1 p-16">
+        {renderPage()}
+      </div>
     </div>
-
-    <div class="card">
-      <h2>Services</h2>
-      <p>
-        • Player Management<br>
-        • Scouting & Recruitment<br>
-        • Career Consulting<br>
-        • Transfer Negotiations
-      </p>
-    </div>
-
-    <div class="footer">
-      © 2026 Doğancan Gündüz. All rights reserved.
-    </div>
-
-  </div>
-
-</body>
-</html>
+  );
+}
